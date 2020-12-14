@@ -3,6 +3,7 @@ import {useHistory,Link} from "react-router-dom";
 import {BrowserRouter, Switch,Route} from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import BarChart from '../../misc/BarChart';
+import LineChart from '../../misc/LineChart'
 import SecondHeader from "../layout/SecondHeader";
 
 export default function Home() {
@@ -18,7 +19,6 @@ export default function Home() {
             {userData.user?(
             <>
             <h1>Welcome {userData.user.displayName}</h1>
-            <BarChart/>
             <SecondHeader/>
             </>
             ):

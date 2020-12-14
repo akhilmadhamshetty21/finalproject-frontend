@@ -73,6 +73,10 @@ body {
 #header .auth-options button:hover {
   background-color: #be3a3a;
 }
+#sheader {
+  width: max-content;
+  margin-bottom: 50px;
+}
 .container {
   max-width: 300px;
 }
@@ -115,7 +119,14 @@ body {
   padding: 0.5rem;
   display: flex;
 }
-
+.bar {
+  width: 500px;
+  height: 500px;
+}
+.line {
+  height: 500px;
+  width: 500px;
+}
 ul {
   list-style-type: none;
   margin: 0;

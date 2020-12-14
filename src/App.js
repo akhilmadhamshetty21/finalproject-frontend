@@ -10,6 +10,7 @@ import Axios from "axios";
 import "./style.css";
 import Budget from './misc/Budget';
 import Expense from './misc/Expense';
+import Dashboard from './misc/Dashboard';
 export default function App() {
     const [userData,setUserData] =useState({
         token:undefined,
@@ -46,6 +47,7 @@ export default function App() {
                 <Route path="/register" component={register}></Route>
                 <Route path="/budget" component={Budget}></Route>
                 <Route path="/expense" component={Expense}></Route>
+                <Route path="/dashboard" component={Dashboard}></Route>
             </Switch>
             </div>
             </UserContext.Provider>

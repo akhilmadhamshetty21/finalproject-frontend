@@ -20,7 +20,7 @@ export default function SecondHeader() {
           <header id ="sheader">
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><a href="#dashboard">Dashboard</a></li>
+            <li><Link to ="/dashboard">Dashboard</Link></li>
             <li><Link to="/budget">Budget</Link></li>
             <li><Link to="/expense">Expense</Link></li>
         </ul>
