@@ -8,7 +8,7 @@ var data = {
     {
       label: 'Budgets',
       backgroundColor: 'orange',
-      hoverBackgroundColor: 'rgba(255,29,132,0.4)',
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       borderWidth: 1,
       data: [],
     },

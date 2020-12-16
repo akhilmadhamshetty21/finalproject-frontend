@@ -29,7 +29,7 @@ const submit = async (e) => {
     }
   };
     return (
-        <div className="page">
+      <div className="page">
       <h2>Login</h2>
       {error && <ErrorNotice message={error} clearError={() => setError(undefined) }/>}
       <form className="form" onSubmit={submit}>

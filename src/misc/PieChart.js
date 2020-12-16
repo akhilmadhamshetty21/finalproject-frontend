@@ -11,8 +11,7 @@ export default function PieChart() {
         datasets: [
             {
                 data: [],
-                backgroundColor: [
-                ]
+                backgroundColor: []
             }],
         labels: []
     };

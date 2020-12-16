@@ -5,7 +5,7 @@ import UserContext from "../../context/UserContext";
 import BarChart from '../../misc/BarChart';
 import LineChart from '../../misc/LineChart'
 import SecondHeader from "../layout/SecondHeader";
-
+import Bar from "../../misc/Bar";
 export default function Home() {
     const {userData}=useContext(UserContext);
     const history=useHistory();

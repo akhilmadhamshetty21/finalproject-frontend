@@ -6,13 +6,19 @@ var data = {
   labels: [],
   datasets: [
     {
+      label: 'Budgets',
+      backgroundColor: 'orange',
+      hoverBackgroundColor: 'rgba(255,29,132,0.4)',
+      borderWidth: 1,
       data: [],
     },
   ]
 };
 
 export default function BarChart() {
-    
+  const [budgetNames, setBudgetNames] = useState();
+  const [budgetData, setBudgetData] = useState();
+
     useEffect(() => {
         const token=localStorage.getItem("auth-token");
         axios.get('http://localhost:5000/budget/all',{
@@ -21,16 +27,41 @@ export default function BarChart() {
             }
           })
         .then(res => {
+            console.log(res.data);
+            let bNames = [];
+            let bData = [];
             for (var i = 0; i < res.data.length; i++) {
-                data.labels[i]=res.data[i].title;
-                data.datasets[0].data[i]=res.data[i].cost;
+                console.log(res.data[i]);
+                bNames.push(res.data[i].title);
+                bData.push(res.data[i].cost);
             }
-            console.log(data);
-            })
-          })
+           console.log(bData);
+            setBudgetData(bData);
+            setBudgetNames(bNames);
+            })         
+
+          }, [])
+
+          
     return (
-        <div className="line">
-        <Line data={data} />
+        <div className="App">
+        <Line data= {{
+  labels: budgetNames,
+  datasets: [
+    {
+      data: budgetData
+    },
+  ]
+}} 
+            width={null}
+            height={null}
+            options={{
+              responsive: true,
+              scales: {
+                yAxes: [{ticks: { beginAtZero: true}}]
+              }
+            }} 
+            title="Personal Budget" redraw />
       </div>
     )
 }
