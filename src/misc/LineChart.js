@@ -4,6 +4,7 @@ import axios from 'axios';
 const SERVER_URL = require('../config/conf').SERVER_URL;
 var data = {
   labels: [],
+  label: 'Budgets',
   datasets: [
     {
       label: 'Budgets',
