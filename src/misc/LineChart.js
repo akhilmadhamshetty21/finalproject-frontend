@@ -1,13 +1,13 @@
 import React,{useEffect,useContext,useState} from 'react';
 import { Line } from "react-chartjs-2";
 import axios from 'axios';
-
+const SERVER_URL = require('../config/conf').SERVER_URL;
 var data = {
   labels: [],
   datasets: [
     {
       label: 'Budgets',
-      backgroundColor: 'orange',
+      backgroundColor: 'Green',
       hoverBackgroundColor: 'rgba(255,29,132,0.4)',
       borderWidth: 1,
       data: [],
@@ -15,13 +15,13 @@ var data = {
   ]
 };
 
-export default function BarChart() {
+export default function LineChart() {
   const [budgetNames, setBudgetNames] = useState();
   const [budgetData, setBudgetData] = useState();
 
     useEffect(() => {
         const token=localStorage.getItem("auth-token");
-        axios.get('http://localhost:5000/budget/all',{
+        axios.get(SERVER_URL+'/budget/all',{
             headers: {
               'x-auth-token': `${token}`
             }
@@ -53,8 +53,6 @@ export default function BarChart() {
     },
   ]
 }} 
-            width={null}
-            height={null}
             options={{
               responsive: true,
               scales: {

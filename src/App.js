@@ -6,11 +6,11 @@ import register from './components/auth/Register';
 import Header from './components/layout/Header';
 import UserContext from "./context/UserContext";
 import Axios from "axios";
-
 import "./style.css";
 import Budget from './misc/Budget';
 import Expense from './misc/Expense';
 import Dashboard from './misc/Dashboard';
+const SERVER_URL = require('./config/conf').SERVER_URL;
 export default function App() {
     const [userData,setUserData] =useState({
         token:undefined,
@@ -24,9 +24,9 @@ export default function App() {
                 localStorage.setItem("auth-token","");
                 token="";
             }
-            const tokenRes=await Axios.post("http://localhost:5000/users/tokenIsValid",null,{headers:{"x-auth-token":token}});
+            const tokenRes=await Axios.post(SERVER_URL+"/users/tokenIsValid",null,{headers:{"x-auth-token":token}});
             if(tokenRes.data){
-                const userRes=await Axios.get("http://localhost:5000/users/",{headers:{"x-auth-token":token},});
+                const userRes=await Axios.get(SERVER_URL+"/users/",{headers:{"x-auth-token":token},});
                 setUserData({
                     token,
                     user:userRes.data,

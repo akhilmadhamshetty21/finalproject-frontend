@@ -4,6 +4,7 @@ import UserContext from "../context/UserContext";
 import SecondHeader from "../components/layout/SecondHeader"
 import ErrorNotice from "./ErrorNotice";
 import Axios from 'axios';
+const SERVER_URL = require('../config/conf').SERVER_URL;
 export default function Budget() {
     const [title,setTitle] =useState();
     const [cost,setBudget] = useState();
@@ -19,11 +20,12 @@ export default function Budget() {
         try {
           const token=localStorage.getItem("auth-token");
           const newBudget={title,cost};
-          await Axios.post("http://localhost:5000/budget",newBudget,{
+          await Axios.post(SERVER_URL+"/budget",newBudget,{
             headers: {
               'x-auth-token': `${token}`
             }
           });
+          history.push("/");
         } catch (err) {
             err.response.data.msg&&setError(err.response.data.msg);
         }
@@ -39,9 +41,13 @@ export default function Budget() {
             <form className="form" onSubmit={submit}>
             <label htmlFor="title">Title</label>
             <select id="title" onChange={(e) => setTitle(e.target.value)}>
+                <option value="selectbudget">Select budget type</option>
                 <option value="electricity">Electricity</option>
                 <option value="rent">Rent</option>
                 <option value="eatout">Eat out</option>
+                <option value="groceries">Groceries</option>
+                <option value="waterbill">Water bill</option>
+                <option value="creditcard">Credit card</option>
                 <option value="other">Others</option>
             </select>
 

@@ -8,13 +8,15 @@ const [email, setEmail] = useState();
 const [password, setPassword] = useState();
 const { setUserData } = useContext(UserContext);
 const history = useHistory();
+const SERVER_URL = require('../../config/conf').SERVER_URL;
 const [error, setError] = useState();
 const submit = async (e) => {
     e.preventDefault();
 
     try {
       const loginUser = { email, password };
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      console.log(SERVER_URL);
+      const loginRes = await Axios.post(SERVER_URL+"/users/login", {
         email,
         password,
       });
@@ -24,6 +26,7 @@ const submit = async (e) => {
       });
       localStorage.setItem("auth-token", loginRes.data.token);
       history.push("/");
+      alert("token expires in 60 seconds");
     } catch (err) {
         err.response.data.msg&&setError(err.response.data.msg);
     }

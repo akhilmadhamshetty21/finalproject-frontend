@@ -14,6 +14,7 @@ var data = {
     },
   ]
 };
+const SERVER_URL = require('../config/conf').SERVER_URL;
 
 export default function BarChart() {
   const [budgetNames, setBudgetNames] = useState();
@@ -21,7 +22,7 @@ export default function BarChart() {
 
     useEffect(() => {
         const token=localStorage.getItem("auth-token");
-        axios.get('http://localhost:5000/budget/all',{
+        axios.get(SERVER_URL+'/budget/all',{
             headers: {
               'x-auth-token': `${token}`
             }

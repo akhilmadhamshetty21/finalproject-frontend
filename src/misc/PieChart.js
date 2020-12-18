@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Chart from 'chart.js';
-
+const SERVER_URL = require('../config/conf').SERVER_URL;
 export default function PieChart() {
     const [month,setMonth] =useState();
     const [year, setYear] = useState();
@@ -11,7 +11,16 @@ export default function PieChart() {
         datasets: [
             {
                 data: [],
-                backgroundColor: []
+                backgroundColor: [
+                ]
+            }],
+        labels: []
+    };
+    var budgetdataSource = {
+        datasets: [
+            {
+                data: [],
+                backgroundColor: [],
             }],
         labels: []
     };
@@ -19,7 +28,7 @@ export default function PieChart() {
         e.preventDefault();
         try {
             const token=localStorage.getItem("auth-token");
-            axios.get('http://localhost:5000/expense/getexpense',{params:{
+            axios.get(SERVER_URL+'/expense/getexpense',{params:{
                 'month':month,
                 'year':year
               }, headers: {
@@ -36,11 +45,32 @@ export default function PieChart() {
                     createChart();
                 }
             })
+            axios.get(SERVER_URL+'/budget/all',{headers: {
+                'x-auth-token': `${token}`
+              }})
+            .then(res=>{
+                for (var i = 0; i < res.data.length; i++) {
+                    budgetdataSource.datasets[0].data[i] = res.data[i].cost;
+                    budgetdataSource.labels[i] = res.data[i].title;
+                    budgetdataSource.datasets[0].backgroundColor[i]='#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                }
+                if(res){
+                    setGraph(true);
+                    createBudgetChart();
+                }
+            })
             function createChart() {
-                var ctx = document.getElementById("myChart").getContext("2d");
+                var ctx = document.getElementById("myExpenseChart").getContext("2d");
                 var myPieChart = new Chart(ctx, {
                     type: 'pie',
                     data: dataSource
+                });
+            }
+            function createBudgetChart() {
+                var ctx = document.getElementById("myBudgetChart").getContext("2d");
+                var myPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: budgetdataSource
                 });
             }
         } catch (err) {
@@ -65,8 +95,11 @@ export default function PieChart() {
             <input type="submit" value="submit" />
         </form>
         {graph?(<>
-            <canvas id="myChart"></canvas>
-            </>):(<>No graph available following data</>)}
+            Expense Data
+            <canvas id="myExpenseChart"></canvas>
+            <canvas id="myBudgetChart"></canvas>
+            </>):(<>
+            No graph available following data</>)}
         </div>
     )
 }
