@@ -45,7 +45,7 @@ export default function BarChart() {
 
           
     return (
-        <div className="App">
+        <div className="bar">
         <Bar data= {{
   labels: budgetNames,
   datasets: [

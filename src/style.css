@@ -150,9 +150,13 @@ li a:hover {
   background-color: #111;
 }
 
-#chart {
-  height: 100px;
-  width: 100px;
+#myExpenseChart {
+  height: 500px;
+  width: 500px;
+}
+#myBudgetChart {
+  height: 500px;
+  width: 500px;
 }
 
 @media screen and (max-width: 550px) {

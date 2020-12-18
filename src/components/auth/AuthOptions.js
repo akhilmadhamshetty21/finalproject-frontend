@@ -31,7 +31,8 @@ export default function AuthOptions() {
                 return true
             }
             else{
-                logout()
+                logout();
+
             }
         }
     }

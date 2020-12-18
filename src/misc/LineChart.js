@@ -45,7 +45,7 @@ export default function LineChart() {
 
           
     return (
-        <div className="App">
+        <div className="line">
         <Line data= {{
   labels: budgetNames,
   datasets: [
